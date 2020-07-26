@@ -20,7 +20,7 @@ class AdminCog(commands.Cog):
     async def stop(self, ctx):
         """RIP the bot."""
         logger.critical(f"Help, {ctx.author.display_name} is closing me!")
-        await ctx.send("Stopping digibot. ☠️")
+        await ctx.send("Stopping DigiBot. ☠️")
         await ctx.bot.close()
 
     @commandsplus.command(

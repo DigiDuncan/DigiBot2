@@ -7,7 +7,7 @@ from digibot.lib import utils
 
 
 def getDataDir():
-    appname = "digibot"
+    appname = "DigiBot"
     appauthor = "DigiDuncan"
     datadir = Path(appdirs.user_data_dir(appname, appauthor))
     return datadir

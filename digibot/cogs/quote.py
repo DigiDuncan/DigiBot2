@@ -6,6 +6,8 @@ from digibot.lib.utils import canBeInt
 
 quotepath = getDataDir() / "quotes.sqlite3"
 
+lastUserToSuccessfullyAddAQuote = None
+
 
 class QuoteCog(commands.Cog):
     def __init__(self, bot):
@@ -92,6 +94,42 @@ class QuoteCog(commands.Cog):
             await ctx.send(q[:1996] + "...")
         else:
             await ctx.send(q)
+
+    @quote.command()
+    async def add(self, ctx, *, s):
+        # STUB
+        # This is going to need to be thought about hard.
+        # How do you parse the author vs. custom author?
+        # How much of the formatting is up to the user?
+        # How do we deal with quote marks in the strings the user inputs?
+
+        global lastUserToSuccessfullyAddAQuote
+        
+        lastUserToSuccessfullyAddAQuote = ctx.message.author.id
+        await ctx.send("This will need a lot of logic to work~!")
+
+    @quote.command()
+    async def remove(self, ctx, *, num):
+        # STUB
+        # Mod-only command.
+        if canBeInt(num):
+            await ctx.send("**MODS ONLY**"
+                           f"Are you sure you want to remove quote {num}?\n"
+                           "*[add a reaction menu here]*")
+
+    @quote.command()
+    async def undo(self, ctx):
+        # STUB
+        global lastUserToSuccessfullyAddAQuote
+
+        if not lastUserToSuccessfullyAddAQuote:
+            await ctx.send("Nothing to undo!")
+            return
+        if ctx.message.author.id == lastUserToSuccessfullyAddAQuote:
+            await ctx.send(f"Are you sure you want to remove quote {quotedb.latest().iden}?\n"
+                           "*[add a reaction menu here]*")
+        else:
+            await ctx.send(f"Sorry, only <@!{lastUserToSuccessfullyAddAQuote} can do that.")
 
 
 def setup(bot):

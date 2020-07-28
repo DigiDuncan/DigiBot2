@@ -55,5 +55,5 @@ def advanced_search(before = None, after = None, authors = None, terms = None):
 def latest(author = None):
     # STUB
     if author:
-        return Quote(1, author, f"\"I hate coding and I'm the latest quote by {author}!\"")
-    return Quote(1, "DigiDuncan", f"\"I hate coding and I'm the latest quote!\"")
+        return Quote(1000, author, f"\"I hate coding and I'm the latest quote by {author}!\"")
+    return Quote(1000, "DigiDuncan", f"\"I hate coding and I'm the latest quote!\"")

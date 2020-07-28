@@ -6,16 +6,16 @@ from digibot.lib.utils import canBeInt
 
 @total_ordering
 class Quote:
-    def __init__(self, author, text, iden = None, custom_author = None):
+    def __init__(self, authors, text, iden = None, custom_author = None):
         self.iden = iden
-        self._author = author
+        self._authors = authors
         self.text = text
         self.date = arrow.now()
         self.custom_author = custom_author
 
     @property
     def author(self):
-        return self.custom_author or self._author
+        return self.custom_author or ",".join(self._authors)
 
     @property
     def formatteddate(self):
@@ -37,31 +37,31 @@ class Quote:
 
 def getQuoteByID(iden):
     # STUB
-    return Quote("DigiDuncan", f"\"I hate coding and I'm quote number {iden}!\"", iden = iden)
+    return Quote(["DigiDuncan"], f"\"I hate coding and I'm quote number {iden}!\"", iden = iden)
 
 
 def search(term):
     # STUB
     if canBeInt(term):
-        return [Quote("DigiDuncan", f"\"I hate coding and you searched for {term}!\"", iden = 1)] * int(term)
+        return [Quote(["DigiDuncan"], f"\"I hate coding and you searched for {term}!\"", iden = 1)] * int(term)
     else:
         return []
 
 
 def advanced_search(before = None, after = None, authors = None, terms = None):
-    return [Quote("DigiDuncan", f"\"I hate coding and you searched for a quote from before {before}, after {after}, by {authors}, containing {terms}!", iden = 1)]
+    return [Quote(["DigiDuncan"], f"\"I hate coding and you searched for a quote from before {before}, after {after}, by {authors}, containing {terms}!", iden = 1)]
 
 
 def latest(author = None):
     # STUB
     if author:
-        return Quote(author, f"\"I hate coding and I'm the latest quote by {author}!\"", iden = 1000)
-    return Quote("DigiDuncan", f"\"I hate coding and I'm the latest quote!\"", iden = 1000)
+        return Quote([author], f"\"I hate coding and I'm the latest quote by {author}!\"", iden = 1000)
+    return Quote(["DigiDuncan"], f"\"I hate coding and I'm the latest quote!\"", iden = 1000)
 
 
 def add(author, text, custom_author = None):
     # STUB
-    return Quote(author, text, custom_author=custom_author)
+    return Quote([author], text, custom_author=custom_author)
 
 
 def remove(iden):
@@ -72,5 +72,5 @@ def remove(iden):
 def randomquote(author = None):
     # STUB
     if author:
-        return Quote(author, f"\"I hate coding and I'm a random quote by {author}!\"", iden = 999)
-    return Quote("DigiDuncan", f"\"I hate coding and I'm a random quote!\"", iden = 999)
+        return Quote([author], f"\"I hate coding and I'm a random quote by {author}!\"", iden = 999)
+    return Quote(["DigiDuncan"], f"\"I hate coding and I'm a random quote!\"", iden = 999)

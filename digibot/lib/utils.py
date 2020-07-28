@@ -47,6 +47,14 @@ def tryInt(val):
     return val
 
 
+def canBeInt(val):
+    try:
+        val = int(val)
+    except ValueError:
+        return False
+    return True
+
+
 def hasPath(root, path):
     """Get a value using a path in nested dicts/lists"""
     """utils.getPath(myDict, "path.to.value", default=100)"""

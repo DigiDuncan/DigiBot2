@@ -104,9 +104,10 @@ class QuoteCog(commands.Cog):
         # How do we deal with quote marks in the strings the user inputs?
 
         global lastUserToSuccessfullyAddAQuote
-        
+
         lastUserToSuccessfullyAddAQuote = ctx.message.author.id
         await ctx.send("This will need a lot of logic to work~!")
+        quotedb.add("DigiDuncan", "Quote")
 
     @quote.command()
     async def remove(self, ctx, *, num):
@@ -116,6 +117,7 @@ class QuoteCog(commands.Cog):
             await ctx.send("**MODS ONLY**"
                            f"Are you sure you want to remove quote {num}?\n"
                            "*[add a reaction menu here]*")
+            quotedb.remove(num)
 
     @quote.command()
     async def undo(self, ctx):
@@ -128,6 +130,7 @@ class QuoteCog(commands.Cog):
         if ctx.message.author.id == lastUserToSuccessfullyAddAQuote:
             await ctx.send(f"Are you sure you want to remove quote {quotedb.latest().iden}?\n"
                            "*[add a reaction menu here]*")
+            quotedb.remove(quotedb.latest().iden)
         else:
             await ctx.send(f"Sorry, only <@!{lastUserToSuccessfullyAddAQuote} can do that.")
 

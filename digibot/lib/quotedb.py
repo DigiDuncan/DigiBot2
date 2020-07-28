@@ -32,7 +32,7 @@ class Quote:
         return self.date == other.date
 
     def __str__(self):
-        return f"{self.text} *-- {self.author}, {self.year}*"
+        return f"**Quote {self.iden}:** {self.text} *-- {self.author}, {self.year}*"
 
 
 def getQuoteByID(iden):
@@ -67,3 +67,10 @@ def add(author, text, custom_author = None):
 def remove(iden):
     # STUB
     return iden
+
+
+def randomquote(author = None):
+    # STUB
+    if author:
+        return Quote(author, f"\"I hate coding and I'm a random quote by {author}!\"", iden = 999)
+    return Quote("DigiDuncan", f"\"I hate coding and I'm a random quote!\"", iden = 999)

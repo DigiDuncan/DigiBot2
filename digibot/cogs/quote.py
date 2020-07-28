@@ -41,6 +41,11 @@ class QuoteCog(commands.Cog):
         await ctx.send(quotedb.latest(author))
 
     @quote.command()
+    async def random(self, ctx, *, author = None):
+        # Get a random quote, either overall or by an author.
+        await ctx.send(quotedb.random(author))
+
+    @quote.command()
     async def advsearch(self, ctx, *, s):
         # Filters.
         before = None

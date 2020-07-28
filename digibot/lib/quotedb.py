@@ -6,7 +6,7 @@ from digibot.lib.utils import canBeInt
 
 @total_ordering
 class Quote:
-    def __init__(self, iden, author, text, custom_author = None):
+    def __init__(self, author, text, iden = None, custom_author = None):
         self.iden = iden
         self._author = author
         self.text = text
@@ -37,23 +37,33 @@ class Quote:
 
 def getQuoteByID(iden):
     # STUB
-    return Quote(iden, "DigiDuncan", f"\"I hate coding and I'm quote number {iden}!\"")
+    return Quote("DigiDuncan", f"\"I hate coding and I'm quote number {iden}!\"", iden = iden)
 
 
 def search(term):
     # STUB
     if canBeInt(term):
-        return [Quote(1, "DigiDuncan", f"\"I hate coding and you searched for {term}!\"")] * int(term)
+        return [Quote("DigiDuncan", f"\"I hate coding and you searched for {term}!\"", iden = 1)] * int(term)
     else:
         return []
 
 
 def advanced_search(before = None, after = None, authors = None, terms = None):
-    return [Quote(1, "DigiDuncan", f"\"I hate coding and you searched for a quote from before {before}, after {after}, by {authors}, containing {terms}!")]
+    return [Quote("DigiDuncan", f"\"I hate coding and you searched for a quote from before {before}, after {after}, by {authors}, containing {terms}!", iden = 1)]
 
 
 def latest(author = None):
     # STUB
     if author:
-        return Quote(1000, author, f"\"I hate coding and I'm the latest quote by {author}!\"")
-    return Quote(1000, "DigiDuncan", f"\"I hate coding and I'm the latest quote!\"")
+        return Quote(author, f"\"I hate coding and I'm the latest quote by {author}!\"", iden = 1000)
+    return Quote("DigiDuncan", f"\"I hate coding and I'm the latest quote!\"", iden = 1000)
+
+
+def add(author, text, custom_author = None):
+    # STUB
+    return Quote(author, text, custom_author=custom_author)
+
+
+def remove(iden):
+    # STUB
+    return iden

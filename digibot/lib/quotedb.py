@@ -6,16 +6,16 @@ from digibot.lib.utils import canBeInt
 
 @total_ordering
 class Quote:
-    def __init__(self, iden, author, text, customauthor = None):
+    def __init__(self, iden, author, text, custom_author = None):
         self.iden = iden
         self._author = author
         self.text = text
         self.date = arrow.now()
-        self.customauthor = customauthor
+        self.custom_author = custom_author
 
     @property
     def author(self):
-        return self.customauthor or self._author
+        return self.custom_author or self._author
 
     @property
     def formatteddate(self):
@@ -46,6 +46,10 @@ def search(term):
         return [Quote(1, "DigiDuncan", f"\"I hate coding and you searched for {term}!\"")] * int(term)
     else:
         return []
+
+
+def advanced_search(before = None, after = None, authors = None, terms = None):
+    return [Quote(1, "DigiDuncan", f"\"I hate coding and you searched for a quote from before {before}, after {after}, by {authors}, containing {terms}!")]
 
 
 def latest(author = None):

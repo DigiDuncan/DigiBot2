@@ -51,39 +51,41 @@ class QuoteCog(commands.Cog):
 
         args = s.split()
         for arg in args:
+            # Python doesn't have switch case soooooo
             if arg.startswith("before:"):
                 # Set before date.
                 a = arg.replace("before:", "", 1)
                 before = a
                 explanation += f" from before {a},"
-            if arg.startswith("after:"):
+            elif arg.startswith("after:"):
                 # Set after date.
                 a = arg.replace("after:", "", 1)
                 after = a
                 explanation += f" from after {a},"
-            if arg.startswith("author:"):
+            elif arg.startswith("author:"):
                 # Append to authors.
                 a = arg.replace("author:", "", 1)
                 authors.append(a)
                 explanation += f" by the author {a},"
-            if arg.startswith("from:"):
+            elif arg.startswith("from:"):
                 a = arg.replace("from:", "", 1)
                 authors.append(a)
                 explanation += f" by the author {a},"
                 # Set author.
                 pass
-            if arg.startswith("term:"):
+            elif arg.startswith("term:"):
                 # Append to terms list.
                 a = arg.replace("term:", "", 1)
                 terms.append(a)
                 explanation += f" with the term {a},"
-            if arg.startswith("contains:"):
+            elif arg.startswith("contains:"):
                 # Append to terms list.
                 a = arg.replace("term:", "", 1)
                 terms.append(a)
                 explanation += f" with the term {a},"
                 pass
 
+        # Remove last comma.
         if explanation:
             explanation = explanation[:-1]
 

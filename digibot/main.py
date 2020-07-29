@@ -12,11 +12,17 @@ from digibot.lib import status
 from digibot.lib.discordlogger import DiscordHandler
 
 logging.basicConfig(level=logging.INFO)
+dfhandler = digilogger.DigiFormatterHandler()
+
 logger = logging.getLogger("digibot")
 logger.handlers = []
 logger.propagate = False
-dfhandler = digilogger.DigiFormatterHandler()
 logger.addHandler(dfhandler)
+
+dlogger = logging.getLogger("discord")
+dlogger.handlers = []
+dlogger.propagate = False
+dlogger.addHandler(dfhandler)
 
 initial_cogs = [
     "admin",

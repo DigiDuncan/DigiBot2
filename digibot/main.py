@@ -12,7 +12,7 @@ from digibot.lib import status
 from digibot.lib.discordlogger import DiscordHandler
 
 logging.basicConfig(level=logging.INFO)
-dfhandler = digilogger.DigiFormatterHandler()
+dfhandler = digilogger.DigiFormatterHandler(showsource = True)
 
 logger = logging.getLogger("digibot")
 logger.handlers = []

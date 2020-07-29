@@ -3,6 +3,8 @@ import pydoc
 import re
 import traceback
 
+NEWLINE = "\n"
+
 
 def clamp(minVal, val, maxVal):
     return max(minVal, min(maxVal, val))
@@ -248,3 +250,34 @@ def findOne(iterator):
     except StopIteration:
         val = None
     return val
+
+
+def sentence_join(items, *, joiner=None, oxford=False):
+    """Join a list of strings like a sentence
+
+    >>> sentence_join(['red', 'green', 'blue'])
+    'red, green and blue'
+
+    Optionally, a different joiner can be provided
+
+    >>> sentence_join(['micro', 'tiny', 'normal', 'amazon', 'giantess'], joiner='or')
+    'micro, tiny, normal, amazon or giantess'
+    """
+    if not items:
+        return ""
+
+    if joiner is None:
+        joiner = "and"
+
+    if oxford:
+        joiner = f", {joiner}"
+    else:
+        joiner = f" {joiner}"
+
+    # Do this in case we received something like a generator, that needs to be wrapped in a list
+    items = list(items)
+
+    if len(items) == 1:
+        return items[0]
+
+    return f"{', '.join(items[:-1])}{joiner} {items[-1]}"

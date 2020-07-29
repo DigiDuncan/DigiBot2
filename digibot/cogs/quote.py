@@ -4,6 +4,8 @@ from digibot.conf import getDataDir
 from digibot.lib import quotedb
 from digibot.lib.utils import canBeInt
 
+quotedb.init()
+
 quotepath = getDataDir() / "quotes.sqlite3"
 
 lastUserToSuccessfullyAddAQuote = None
@@ -18,11 +20,19 @@ class QuoteCog(commands.Cog):
         if ctx.invoked_subcommand is None:
             # Get quote by ID.
             num = ctx.subcommand_passed
-            if num and canBeInt(num):
-                await ctx.send(f"Loading quote {num}...")
-                await ctx.send(quotedb.getQuoteByID(num))
-            else:
+            if not (num and canBeInt(num)):
                 await ctx.send(f"Invalid quote or subcommand `{num}`.")
+                return
+            message = await ctx.send(f"Loading quote {num}...")
+            quotetosend = quotedb.getQuoteByID(num)
+            if quotetosend is None:
+                await message.edit(content = f"Quote {num} not found!")
+                return
+            await message.edit(content = quotetosend)
+
+    @quote.command()
+    async def get(self, ctx, iden):
+        await ctx.send(repr(quotedb.getQuoteByID(iden)))
 
     @quote.command()
     async def search(self, ctx, *, term):

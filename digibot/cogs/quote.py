@@ -178,10 +178,42 @@ class QuoteCog(commands.Cog):
         # STUB
         if ctx.invoked_subcommand is None:
             s = ctx.subcommand_passed
-            await ctx.send(f"Invalid quote or subcommand `update {s}`.")
+            await ctx.send(f"Invalid quote or subcommand `{s}`.")
 
     @update.command()
     async def text(self, ctx, iden, newtext):
+        # STUB
+        pass
+
+    @update.command()
+    async def authors(self, ctx, iden, newauthors):
+        # STUB
+        pass
+
+    @update.command()
+    async def date(self, ctx, iden, newdate):
+        # STUB
+        pass
+
+    @update.command()
+    async def customauthor(self, ctx, iden, newcustomauthor):
+        # STUB
+        pass
+
+    @update.group()
+    async def tag(self, ctx):
+        # STUB
+        if ctx.invoked_subcommand is None:
+            s = ctx.subcommand_passed
+            await ctx.send(f"Invalid quote or subcommand `{s}`.")
+
+    @tag.command()
+    async def add(self, ctx, iden, newtag):
+        # STUB
+        pass
+
+    @tag.command()
+    async def remove(self, ctx, iden, tag):
         # STUB
         pass
 

@@ -22,7 +22,7 @@ class QuoteCog(commands.Cog):
                 await ctx.send(f"Loading quote {num}...")
                 await ctx.send(quotedb.getQuoteByID(num))
             else:
-                await ctx.send(f"Invalid quote or subcommand {num}.")
+                await ctx.send(f"Invalid quote or subcommand `{num}`.")
 
     @quote.command()
     async def search(self, ctx, *, term):
@@ -140,6 +140,28 @@ class QuoteCog(commands.Cog):
             quotedb.remove(quotedb.latest().iden)
         else:
             await ctx.send(f"Sorry, only <@!{lastUserToSuccessfullyAddAQuote} can do that.")
+
+    @quote.group()
+    async def tag(self, ctx):
+        # STUB
+        if ctx.invoked_subcommand is None:
+            # Get quote by ID.
+            num = ctx.subcommand_passed
+            if num and canBeInt(num):
+                await ctx.send(f"Loading tags for quote {num}...")
+                await ctx.send(quotedb.listtags(num))
+            else:
+                await ctx.send(f"Invalid quote or subcommand `tag {num}`.")
+
+    @tag.command()
+    async def add(self, ctx, iden, tag):
+        # STUB
+        await ctx.send(quotedb.addtag(iden, tag))
+
+    @tag.command()
+    async def remove(self, ctx, iden, tag):
+        # STUB
+        await ctx.send(quotedb.removetag(iden, tag))
 
 
 def setup(bot):

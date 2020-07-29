@@ -74,3 +74,15 @@ def randomquote(author = None):
     if author:
         return Quote([author], f"\"I hate coding and I'm a random quote by {author}!\"", iden = 999)
     return Quote(["DigiDuncan"], f"\"I hate coding and I'm a random quote!\"", iden = 999)
+
+
+def addtag(iden, tag):
+    return f"Added tag `{tag}` to quote {iden}"
+
+
+def removetag(iden, tag):
+    return f"Removed tag `{tag}` from quote {iden}"
+
+
+def listtags(iden):
+    return ["tag1", "tag2", "tag3", "tag4"]

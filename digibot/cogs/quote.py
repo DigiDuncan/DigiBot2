@@ -163,6 +163,18 @@ class QuoteCog(commands.Cog):
         # STUB
         await ctx.send(quotedb.removetag(iden, tag))
 
+    @quote.group()
+    async def update(self, ctx):
+        # STUB
+        if ctx.invoked_subcommand is None:
+            s = ctx.subcommand_passed
+            await ctx.send(f"Invalid quote or subcommand `update {s}`.")
+
+    @update.command()
+    async def text(self, ctx, iden, newtext):
+        # STUB
+        pass
+
 
 def setup(bot):
     bot.add_cog(QuoteCog(bot))

@@ -21,7 +21,7 @@ logger.addHandler(dfhandler)
 initial_cogs = [
     "admin",
     "fun",
-    "help",
+    # "help",
     "quote"
 ]
 
@@ -38,7 +38,7 @@ def main():
 
     bot = commands.Bot(command_prefix = conf.prefix, description = conf.description)
 
-    bot.remove_command("help")
+    # bot.remove_command("help")
 
     for cog in initial_cogs:
         bot.load_extension("digibot.cogs." + cog)

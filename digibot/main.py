@@ -13,11 +13,12 @@ from digibot.lib.discordlogger import DiscordHandler
 
 logging.basicConfig(level=logging.INFO)
 dfhandler = digilogger.DigiFormatterHandler(showsource = True)
+dfhandlerns = digilogger.DigiFormatterHandler()
 
 logger = logging.getLogger("digibot")
 logger.handlers = []
 logger.propagate = False
-logger.addHandler(dfhandler)
+logger.addHandler(dfhandlerns)
 
 dlogger = logging.getLogger("discord")
 dlogger.handlers = []
